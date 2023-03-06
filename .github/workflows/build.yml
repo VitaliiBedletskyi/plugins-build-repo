@@ -19,7 +19,7 @@ jobs:
       contents: write
     strategy:
       matrix:
-        node-version: [ 16.x ]
+#        node-version: [ 16.x ]
         include:
           - os: windows-latest
             platform: win32
@@ -45,10 +45,10 @@ jobs:
           repository: ${{ inputs.repo }}
           ref: ${{ inputs.branch }}
 
-      - name: Use Node.js ${{ matrix.node-version }} on ${{ matrix.platform }}-${{ matrix.arch }}
+      - name: Use Node.js 16.x on ${{ matrix.platform }}-${{ matrix.arch }}
         uses: actions/setup-node@v3
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: 16.x
 
       - name: Install node modules
         run: npm ci --target_arch=${{ matrix.arch }} --target_platform=${{ matrix.platform }}
