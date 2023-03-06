@@ -55,18 +55,15 @@ jobs:
         env:
           npm_config_arch: ${{ matrix.npm_config_arch }}
 
-      - name: Package plugin
-        run: npm run package
-
       - name: Generate package folder name
         id: package-name
         run: echo "PACKAGE_NAME=MariaDB-${{ github.run_id }}-${{ matrix.platform }}-${{ matrix.arch }}" >> $GITHUB_OUTPUT
 
-#      - name: Rename package folder
-#        run: mv release ${{ steps.package-name.outputs.PACKAGE_NAME }}
+      - name: Package plugin
+        run: npm run package -- --output=${{ steps.package-name.outputs.PACKAGE_NAME }}
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
         with:
           name: ${{ steps.package-name.outputs.PACKAGE_NAME }}
-          path: release
+          path: ${{ steps.package-name.outputs.PACKAGE_NAME }}
