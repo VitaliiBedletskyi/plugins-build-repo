@@ -45,12 +45,12 @@ jobs:
           repository: ${{ inputs.repo }}
           ref: ${{ inputs.branch }}
 
-      - name: Use Node.js ${{ matrix.node-version }}
+      - name: Use Node.js ${{ matrix.node-version }} on ${{ matrix.platform }}-${{ matrix.arch }}
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
 
-      - name: "Install node modules - Arch: ${{ matrix.arch }} Platform: ${{ matrix.platform }}"
+      - name: Install node modules
         run: npm ci --target_arch=${{ matrix.arch }} --target_platform=${{ matrix.platform }}
         env:
           npm_config_arch: ${{ matrix.npm_config_arch }}
@@ -69,5 +69,4 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: ${{ steps.package-name.outputs.PACKAGE_NAME }}
-          path: |
-            ${{ steps.package-name.outputs.PACKAGE_NAME }}
+          path: "MariDB-*"
