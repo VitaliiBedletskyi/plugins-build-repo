@@ -51,10 +51,13 @@ jobs:
           node-version: 16.x
 
       - name: Install node modules
-        run: npm install
-        #--target_arch=${{ matrix.arch }} --target_platform=${{ matrix.platform }}
-#        env:
-#          npm_config_arch: ${{ matrix.npm_config_arch }}
+        run: npm install --target_arch=${{ matrix.arch }} --target_platform=${{ matrix.platform }}
+        env:
+          npm_config_arch: ${{ matrix.npm_config_arch }}
+
+      - name: SSH crypto
+        if: ${{ matrix.platform == 'win32' }}
+        run: Get-ChildItem -Path node_modules\ssh2\lib\protocol\crypto\build
 
       - name: Generate package folder name
         id: package-name
