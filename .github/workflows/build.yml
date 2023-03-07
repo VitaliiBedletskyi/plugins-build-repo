@@ -51,13 +51,13 @@ jobs:
           node-version: 16.x
 
       - name: Install node modules
-        run: npm install --target_arch=${{ matrix.arch }} --target_platform=${{ matrix.platform }}
+        run: npm install --target_arch=${{ matrix.arch }} --target_platform=${{ matrix.platform }} --verbose
         env:
           npm_config_arch: ${{ matrix.npm_config_arch }}
 
-      - name: Rebuild dependencies for windows
-        if: ${{ matrix.platform == 'win32' }}
-        run: npm rebuild
+#      - name: Rebuild dependencies for windows
+#        if: ${{ matrix.platform == 'win32' }}
+#        run: npm rebuild
 
       - name: SSH crypto
         if: ${{ matrix.platform == 'win32' }}
