@@ -55,6 +55,10 @@ jobs:
         env:
           npm_config_arch: ${{ matrix.npm_config_arch }}
 
+      - name: Rebuild dependencies for windows
+        if: ${{ matrix.platform == 'win32' }}
+        run: npm rebuild
+
       - name: SSH crypto
         if: ${{ matrix.platform == 'win32' }}
         run: Get-ChildItem -Path node_modules\ssh2\lib\protocol\crypto\build
