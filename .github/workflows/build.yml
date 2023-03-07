@@ -51,7 +51,7 @@ jobs:
           node-version: 16.x
 
       - name: Install node modules
-        run: npm ci --target_arch=${{ matrix.arch }} --target_platform=${{ matrix.platform }}
+        run: npm install --target_arch=${{ matrix.arch }} --target_platform=${{ matrix.platform }}
         env:
           npm_config_arch: ${{ matrix.npm_config_arch }}
 
