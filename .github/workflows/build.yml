@@ -21,7 +21,7 @@ jobs:
       matrix:
 #        node-version: [ 16.x ]
         include:
-          - os: windows-latest
+          - os: windows-2019
             platform: win32
             arch: x64
             npm_config_arch: x64
